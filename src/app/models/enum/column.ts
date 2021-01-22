@@ -15,21 +15,15 @@ export enum Column {
 export const AllColumns = [
   Column.Items,
   Column.Belts,
-  Column.Wagons,
   Column.Factories,
-  Column.Beacons,
-  Column.Power,
-  Column.Pollution,
   Column.Link,
 ];
 
 export const PrecisionColumns = [
   Column.Items,
   Column.Belts,
-  Column.Wagons,
   Column.Factories,
-  Column.Power,
-  Column.Pollution,
+  Column.Link,
 ];
 
 export const ColumnsAsOptions: IdName[] = AllColumns.map((id) => ({

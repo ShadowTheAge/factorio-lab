@@ -34,9 +34,6 @@
           </button>
         </div>
       </th>
-      <th class="num-icon" *ngIf="columns[Column.Wagons].show">
-        <div class="header">Wagons{{ rateLabel }}</div>
-      </th>
       <th *ngIf="columns[Column.Factories].show" colspan="3">
         <div class="header">
           Factories
@@ -48,24 +45,6 @@
             <i class="material-icons">undo</i>
           </button>
         </div>
-      </th>
-      <th *ngIf="columns[Column.Beacons].show" colspan="3">
-        <div class="header">
-          Beacons
-          <button
-            *ngIf="modifiedBeacons"
-            title="Undo all beacon modifications"
-            (click)="resetBeacons.emit()"
-          >
-            <i class="material-icons">undo</i>
-          </button>
-        </div>
-      </th>
-      <th class="num-unit" *ngIf="columns[Column.Power].show">
-        <div class="header">Power</div>
-      </th>
-      <th *ngIf="columns[Column.Pollution].show">
-        <div class="header">Pollution{{ rateLabel }}</div>
       </th>
       <!-- Reset / Link -->
       <th *ngIf="columns[Column.Link].show && mode === ListMode.All">
@@ -183,28 +162,6 @@
             </div>
           </ng-container>
         </td>
-        <td *ngIf="columns[Column.Wagons].show">
-          <ng-container *ngIf="itemSettings[step.itemId]?.wagon as wagon">
-            <div
-              *ngIf="
-                step.wagons &&
-                (!step.recipeId ||
-                  !data.itemEntities[recipeSettings[step.recipeId].factory]
-                    .factory.research)
-              "
-              class="flex"
-            >
-              <span class="monospace">{{
-                rate(step.wagons, effPrecision[Column.Wagons])
-              }}</span>
-              <lab-icon
-                [iconId]="wagon"
-                [tooltip]="data.itemEntities[wagon].name"
-                [data]="data"
-              ></lab-icon>
-            </div>
-          </ng-container>
-        </td>
         <ng-container *ngIf="columns[Column.Factories].show">
           <ng-container
             *ngIf="recipeSettings[step.recipeId]?.factory as factory"
@@ -300,106 +257,6 @@
           </ng-container>
           <td colspan="3" *ngIf="!recipeSettings[step.recipeId]?.factory"></td>
         </ng-container>
-        <ng-container *ngIf="columns[Column.Beacons].show">
-          <ng-container *ngIf="recipeSettings[step.recipeId]?.beacon as beacon">
-            <td>
-              <div class="flex">
-                <input
-                  class="beacon"
-                  title="Enter number of beacons"
-                  type="number"
-                  min="0"
-                  data-test="lab-list-beacons"
-                  [value]="recipeSettings[step.recipeId].beaconCount"
-                  (input)="beaconCountChange(step, $event)"
-                />
-              </div>
-            </td>
-            <td class="split-column">
-              <div class="flex">
-                <ng-container *ngIf="recipeSettings[step.recipeId].beaconCount">
-                  <ng-container
-                    *ngIf="data.beaconIds.length === 1; else beaconPicker"
-                  >
-                    <lab-icon
-                      [iconId]="beacon"
-                      [tooltip]="data.itemEntities[beacon].name"
-                      [item]="data.itemEntities[beacon]"
-                      [data]="data"
-                    ></lab-icon
-                  ></ng-container>
-                  <ng-template #beaconPicker>
-                    <lab-select
-                      header="Select a beacon"
-                      [data]="data"
-                      [selected]="beacon"
-                      [options]="data.beaconIds"
-                      (selectId)="
-                        setBeacon.emit({
-                          id: step.itemId,
-                          value: $event,
-                          default: beacon
-                        })
-                      "
-                    >
-                      <lab-icon
-                        class="button"
-                        title="Click to change beacon"
-                        [data]="data"
-                        [iconId]="beacon"
-                        [tooltip]="data.itemEntities[beacon].name"
-                        [item]="data.itemEntities[beacon]"
-                      ></lab-icon>
-                    </lab-select>
-                  </ng-template>
-                </ng-container>
-              </div>
-            </td>
-            <td class="split-column">
-              <ng-container *ngIf="recipeSettings[step.recipeId].beaconCount">
-                <div
-                  *ngIf="
-                    recipeSettings[step.recipeId]?.beaconModules as modules
-                  "
-                  class="flex mod"
-                >
-                  <lab-select
-                    *ngFor="let mod of modules; index as i; first as first"
-                    header="Select a module"
-                    [data]="data"
-                    [selected]="mod"
-                    [options]="data.beaconModuleIds"
-                    includeEmptyModule="true"
-                    (selectId)="beaconModuleChange(step, $event, i)"
-                  >
-                    <lab-icon
-                      class="button"
-                      title="Click to change beacon module"
-                      [class.module]="!first"
-                      [data]="data"
-                      [iconId]="mod"
-                      [tooltip]="data.itemEntities[mod]?.name"
-                      [item]="data.itemEntities[mod]"
-                    ></lab-icon>
-                  </lab-select>
-                </div>
-              </ng-container>
-            </td>
-          </ng-container>
-          <td colspan="3" *ngIf="!recipeSettings[step.recipeId]?.beacon"></td>
-        </ng-container>
-        <td *ngIf="columns[Column.Power].show">
-          <div *ngIf="step.power?.nonzero()" class="flex">
-            <span class="monospace">{{ power(step.power) }}</span>
-          </div>
-        </td>
-        <td *ngIf="columns[Column.Pollution].show">
-          <div *ngIf="step.pollution?.nonzero()" class="flex">
-            <span class="monospace">{{
-              rate(step.pollution, effPrecision[Column.Pollution])
-            }}</span>
-          </div>
-        </td>
         <td class="nowrap" *ngIf="columns[Column.Link].show">
           <div class="flex links">
             <a
@@ -527,34 +384,6 @@
                         [tooltip]="data.itemEntities[belt].name"
                         [item]="data.itemEntities[belt]"
                         [displayRate]="displayRate"
-                      ></lab-icon>
-                    </div>
-                  </ng-container>
-                </td>
-                <td *ngIf="columns[Column.Wagons].show">
-                  <ng-container
-                    *ngIf="itemSettings[inStep.itemId]?.wagon as wagon"
-                  >
-                    <div
-                      *ngIf="
-                        inStep.wagons &&
-                        (!inStep.recipeId ||
-                          !data.itemEntities[
-                            recipeSettings[inStep.recipeId].factory
-                          ].factory.research)
-                      "
-                      class="flex"
-                    >
-                      <span class="monospace">{{
-                        rate(
-                          inStep.wagons.mul(percent),
-                          effPrecision[Column.Wagons]
-                        )
-                      }}</span>
-                      <lab-icon
-                        [data]="data"
-                        [iconId]="wagon"
-                        [tooltip]="data.itemEntities[wagon].name"
                       ></lab-icon>
                     </div>
                   </ng-container>
@@ -1007,30 +836,6 @@
         </tr>
       </ng-container>
     </ng-container>
-    <tr
-      *ngIf="
-        mode === ListMode.All &&
-        (columns[Column.Power].show || columns[Column.Pollution].show)
-      "
-      class="border row col"
-    >
-      <td [colSpan]="totalSpan">
-        <div class="flex summary-label">
-          <span class="monospace">Total:</span>
-        </div>
-      </td>
-      <td *ngIf="columns[Column.Power].show">
-        <div class="flex">
-          <span class="monospace">{{ totalPower }}</span>
-        </div>
-      </td>
-      <td *ngIf="columns[Column.Pollution].show">
-        <div class="flex">
-          <span class="monospace">{{ totalPollution }}</span>
-        </div>
-      </td>
-      <td></td>
-    </tr>
     <tr *ngIf="mode === ListMode.Focus && !selected">
       <td colspan="100" class="message">Select a node to see details</td>
     </tr>

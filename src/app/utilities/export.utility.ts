@@ -69,10 +69,6 @@ export class ExportUtility {
       exp.Belts = step.belts?.toNumber() || 0;
       exp.Belt = itemSettings[step.itemId].belt;
     }
-    if (columns[Column.Wagons].show) {
-      exp.Wagons = step.wagons?.toNumber() || 0;
-      exp.Wagon = itemSettings[step.itemId].wagon;
-    }
     if (step.recipeId) {
       exp.Recipe = step.recipeId;
       const recipe = recipeSettings[step.recipeId];
@@ -81,34 +77,12 @@ export class ExportUtility {
         exp.Factory = recipe.factory;
         exp.FactoryModules = `"${(recipe.factoryModules || []).join(',')}"`;
       }
-      if (columns[Column.Beacons].show) {
-        exp.Beacons = recipe.beaconCount;
-        exp.Beacon = recipe.beacon;
-        exp.BeaconModules = `"${(recipe.beaconModules || []).join(',')}"`;
-      }
-      if (columns[Column.Power].show) {
-        exp.Power = step.power?.toNumber() || 0;
-      }
-      if (columns[Column.Pollution].show) {
-        exp.Pollution = step.pollution?.toNumber() || 0;
-      }
     } else {
       exp.Recipe = '';
       if (columns[Column.Factories].show) {
         exp.Factories = 0;
         exp.Factory = '';
         exp.FactoryModules = '';
-      }
-      if (columns[Column.Beacons].show) {
-        exp.Beacons = 0;
-        exp.Beacon = '';
-        exp.BeaconModules = '';
-      }
-      if (columns[Column.Power].show) {
-        exp.Power = 0;
-      }
-      if (columns[Column.Pollution].show) {
-        exp.Pollution = 0;
       }
     }
     return exp;

@@ -83,13 +83,7 @@ export class ListComponent {
     if (this.columns[Column.Belts].show) {
       this.totalSpan++;
     }
-    if (this.columns[Column.Wagons].show) {
-      this.totalSpan++;
-    }
     if (this.columns[Column.Factories].show) {
-      this.totalSpan += 3;
-    }
-    if (this.columns[Column.Beacons].show) {
       this.totalSpan += 3;
     }
     this.setEffectivePrecision();
