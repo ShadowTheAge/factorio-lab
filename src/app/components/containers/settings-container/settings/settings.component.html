@@ -64,12 +64,6 @@
     <div>
       <div class="flex tween">
         <div class="header">Recipes</div>
-        <a
-          class="small"
-          href="https://github.com/factoriolab/factorio-lab/issues/new?assignees=&labels=mod+support&template=mod-request.md&title="
-          target="_blank"
-          >Request a mod</a
-        >
       </div>
       <table class="thin">
         <tr>
@@ -99,36 +93,12 @@
             </lab-toggle>
           </td>
         </tr>
-        <tr>
-          <td>Difficulty</td>
-          <td>
-            <lab-options
-              title="Select recipe difficulty"
-              [selected]="settings.expensive"
-              [options]="difficultyOptions"
-              (selectId)="setExpensive.emit($event)"
-            ></lab-options>
-          </td>
-        </tr>
       </table>
     </div>
   </div>
   <div class="hole">
     <div>
       <div class="header">Factory</div>
-      <table class="thin">
-        <tr>
-          <td>Preset</td>
-          <td>
-            <lab-options
-              title="Select preset factory"
-              [selected]="settings.preset"
-              [options]="PresetOptions"
-              (selectId)="setPreset.emit($event)"
-            ></lab-options>
-          </td>
-        </tr>
-      </table>
       <table class="factories">
         <ng-container
           *ngFor="let f of factoryRows; let i = index; let last = last"
@@ -210,102 +180,6 @@
               ></lab-icon>
             </td>
             <td>
-              <ng-container *ngIf="factory.moduleRank">
-                <lab-ranker
-                  [data]="data"
-                  [selected]="factory.moduleRank"
-                  [options]="data.moduleIds"
-                  (selectIds)="
-                    setModuleRank.emit({
-                      id: f,
-                      value: $event
-                    })
-                  "
-                >
-                  <lab-icon
-                    class="button"
-                    tooltip="Module preferences"
-                    [data]="data"
-                    [iconId]="
-                      factory.moduleRank.length
-                        ? factory.moduleRank[0]
-                        : ItemId.Module
-                    "
-                    [text]="
-                      factory.moduleRank.length > 1
-                        ? factory.moduleRank.length
-                        : null
-                    "
-                  ></lab-icon>
-                </lab-ranker>
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="factory.beaconCount != null">
-                <input
-                  class="beacon"
-                  type="number"
-                  title="Default number of beacons"
-                  placeholder="# Beacons"
-                  min="0"
-                  step="1"
-                  data-test="lab-settings-beacons"
-                  [value]="factory.beaconCount"
-                  (input)="changeBeaconCount(f, $event)"
-                />
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="factory.beaconCount > 0">
-                <lab-icon
-                  class="pad"
-                  *ngIf="data.beaconIds.length === 1; else beaconPicker"
-                  [iconId]="factory.beacon"
-                  [data]="data"
-                ></lab-icon>
-                <ng-template #beaconPicker>
-                  <lab-select
-                    header="Select a beacon"
-                    [data]="data"
-                    [selected]="factory.beacon"
-                    [options]="data.beaconIds"
-                    [data]="data"
-                    (selectId)="setBeacon.emit({ id: f, value: $event })"
-                  >
-                    <lab-icon
-                      class="button"
-                      tooltip="Choose default beacon"
-                      [data]="data"
-                      [iconId]="factory.beacon"
-                    ></lab-icon>
-                  </lab-select>
-                </ng-template>
-              </ng-container>
-            </td>
-            <td>
-              <lab-select
-                *ngIf="factory.beaconCount > 0"
-                header="Select a module"
-                [data]="data"
-                [selected]="factory.beaconModule"
-                [options]="data.beaconModuleIds"
-                includeEmptyModule="true"
-                (selectId)="
-                  setBeaconModule.emit({
-                    id: f,
-                    value: $event
-                  })
-                "
-              >
-                <lab-icon
-                  class="button"
-                  tooltip="Beacon module"
-                  [data]="data"
-                  [iconId]="factory.beaconModule"
-                ></lab-icon>
-              </lab-select>
-            </td>
-            <td>
               <button
                 *ngIf="i > 1"
                 title="Raise factory rank"
@@ -326,7 +200,6 @@
         <tr>
           <td><div>Belt</div></td>
           <td><div>Fuel</div></td>
-          <td><div>Pipe flow rate</div></td>
         </tr>
         <tr>
           <td>
@@ -367,48 +240,6 @@
               ></lab-icon>
             </lab-select>
           </td>
-          <td>
-            <div>
-              <input
-                type="number"
-                title="Enter pipe flow rate"
-                placeholder="1500"
-                min="0"
-                step="1"
-                data-test="lab-settings-flow-rate"
-                [value]="settings.flowRate"
-                (input)="emitNumber(setFlowRate, $event)"
-              />
-              <div>
-                u/sec
-                <a
-                  href="https://wiki.factorio.com/Fluid_system#Pipelines"
-                  target="_blank"
-                  >Wiki</a
-                >
-              </div>
-            </div>
-          </td>
-        </tr>
-      </table>
-      <table class="wide">
-        <tr>
-          <td>
-            Inserter target
-            <a
-              href="https://wiki.factorio.com/Inserters#Inserter_Throughput"
-              target="_blank"
-              >Wiki</a
-            >
-          </td>
-          <td>
-            <lab-options
-              title="Select inserter target"
-              [selected]="settings.inserterTarget"
-              [options]="InserterTargetOptions"
-              (selectId)="setInserterTarget.emit($event)"
-            ></lab-options>
-          </td>
         </tr>
       </table>
     </div>
@@ -432,28 +263,6 @@
               (input)="emitNumber(setMiningBonus, $event)"
             />
             %
-          </td>
-        </tr>
-        <tr>
-          <td>Research speed</td>
-          <td>
-            <lab-options
-              title="Select research speed bonus"
-              [selected]="settings.researchSpeed"
-              [options]="ResearchSpeedOptions"
-              (selectId)="setResearchSpeed.emit($event)"
-            ></lab-options>
-          </td>
-        </tr>
-        <tr>
-          <td>Inserter capacity</td>
-          <td>
-            <lab-options
-              title="Select inserter capacity bonus"
-              [selected]="settings.inserterCapacity"
-              [options]="InserterCapacityOptions"
-              (selectId)="setInserterCapacity.emit($event)"
-            ></lab-options>
           </td>
         </tr>
       </table>
