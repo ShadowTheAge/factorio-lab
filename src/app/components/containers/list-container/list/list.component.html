@@ -506,31 +506,6 @@
                 </div>
               </ng-container>
             </td>
-            <td *ngIf="columns[Column.Wagons].show">
-              <ng-container *ngIf="itemSettings[step.itemId]?.wagon as wagon">
-                <div
-                  *ngIf="
-                    step.wagons &&
-                    (!step.recipeId ||
-                      !data.itemEntities[recipeSettings[step.recipeId].factory]
-                        .factory.research)
-                  "
-                  class="flex"
-                >
-                  <span class="monospace">{{
-                    rate(
-                      step.wagons.mul(parent.value),
-                      effPrecision[Column.Wagons]
-                    )
-                  }}</span>
-                  <lab-icon
-                    [data]="data"
-                    [iconId]="wagon"
-                    [tooltip]="data.itemEntities[wagon].name"
-                  ></lab-icon>
-                </div>
-              </ng-container>
-            </td>
             <ng-container *ngIf="columns[Column.Factories].show">
               <ng-container
                 *ngIf="recipeSettings[step.recipeId]?.factory as factory"
