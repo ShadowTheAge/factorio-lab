@@ -5,16 +5,16 @@ import { ListContainerComponent, FlowContainerComponent } from './components';
 
 const routes: Routes = [
   {
-    path: 'factorio-lab/list',
+    path: 'list',
     component: ListContainerComponent,
   },
   {
-    path: 'factorio-lab/flow',
+    path: 'flow',
     component: FlowContainerComponent,
   },
   {
     path: '**',
-    redirectTo: 'factorio-lab/list',
+    redirectTo: 'list',
   },
 ];
 
