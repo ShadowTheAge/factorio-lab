@@ -2017,6 +2017,12 @@
       "name": "Conveyor belt MK.I",
       "row": 2,
       "stack": 200,
+      "factory": {
+        "drain": 0,
+        "electric": 0,
+        "mining": false,
+        "speed": 6
+      },
       "belt": {
         "speed": 6
       },
@@ -2028,6 +2034,12 @@
       "name": "Conveyor belt MK.II",
       "row": 2,
       "stack": 200,
+      "factory": {
+        "drain": 0,
+        "electric": 0,
+        "mining": false,
+        "speed": 12
+      },
       "belt": {
         "speed": 12
       },
@@ -2039,6 +2051,12 @@
       "name": "Conveyor belt MK.III",
       "row": 2,
       "stack": 200,
+      "factory": {
+        "drain": 0,
+        "electric": 0,
+        "mining": false,
+        "speed": 30
+      },
       "belt": {
         "speed": 30
       },
@@ -2138,12 +2156,6 @@
       "name": "Mining machine",
       "row": 3,
       "stack": 20,
-      "factory": {
-        "drain": 0,
-        "electric": 0,
-        "mining": true,
-        "speed": 1
-      },
       "fuel": 0
     },
     {
@@ -2166,12 +2178,6 @@
       "name": "Oil extractor",
       "row": 3,
       "stack": 10,
-      "factory": {
-        "drain": 0,
-        "electric": 0,
-        "mining": true,
-        "speed": 1
-      },
       "fuel": 0
     },
     {
@@ -2194,6 +2200,12 @@
       "name": "Miniature particle collider",
       "row": 3,
       "stack": 10,
+      "factory": {
+        "drain": 0,
+        "electric": 0,
+        "mining": false,
+        "speed": 1
+      },
       "fuel": 0
     },
     {
@@ -3093,9 +3105,7 @@
         "i1121": 5
       },
       "producers": [
-        "i2303",
-        "i2304",
-        "i2305"
+        "i2310"
       ],
       "time": 5
     },
@@ -3638,9 +3648,7 @@
         "i1120": 2
       },
       "producers": [
-        "i2303",
-        "i2304",
-        "i2305"
+        "i2310"
       ],
       "time": 2
     },
@@ -4135,9 +4143,7 @@
         "i1127": 1
       },
       "producers": [
-        "i2303",
-        "i2304",
-        "i2305"
+        "i2310"
       ],
       "time": 8
     },
@@ -4295,17 +4301,17 @@
     {
       "id": "r115",
       "in": {
-        "i1120": 200
+        "i1120": 1
       },
       "out": {
         "i1121": 1
       },
       "producers": [
-        "i2303",
-        "i2304",
-        "i2305"
+        "i2001",
+        "i2002",
+        "i2003"
       ],
-      "time": 0.016666666666666666
+      "time": 100
     },
     {
       "id": "i1001",
