@@ -1,4 +1,4 @@
-# Temporary Dyson Space Program calculator
+# Temporary Dyson Sphere Program calculator
 
 This is a temporary fork of https://github.com/factoriolab/factorio-lab
 
@@ -14,9 +14,10 @@ I have used unity asset bundle extractor https://github.com/DerPopo/UABE to extr
 
 File containing information are called:
 
-Recipes - RecipeProtoSet
-Items - ItemProtoSet
-Resources - VeinProtoSet
-Localized names - StringProtoSet
+- Recipes - RecipeProtoSet
+- Items - ItemProtoSet
+- Resources - VeinProtoSet
+- Localized names - StringProtoSet
+
 There are other like for techs etc
 As for some meta information like belt speeds and assembler speeds - they are there but harder to get so I just entered them manually
