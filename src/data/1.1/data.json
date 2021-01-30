@@ -4416,14 +4416,14 @@
       "producers": [
         "i2306"
       ],
-      "time": 0.8
+      "time": 1.2
     },
     {
       "id": "i1116",
       "producers": [
         "i2306"
       ],
-      "time": 0.8
+      "time": 1.2
     }
   ],
   "defaults": {
